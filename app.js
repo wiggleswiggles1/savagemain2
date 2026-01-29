@@ -62,7 +62,7 @@ for (let i = 0; i < rows; i++) {
 }
 
 // --- BUCKET SENSORS (Your preferred values) ---
-const bucketValues = [100, 50, 25, 15, 10, 5, 1, -1, -2, -1, 1, 5, 10, 15, 25, 50, 100];
+const bucketValues = [100, 50, 25, 15, 10, 5, 1, -1, -25, -1, 1, 5, 10, 15, 25, 50, 100];
 const totalWidth = 600;
 const bWidth = totalWidth / bucketValues.length;
 
