@@ -167,7 +167,7 @@ database.ref('admin_commands').on('child_added', (snapshot) => {
 });
 
 // --- LEADERBOARD (Points Based with Blacklist) ---
-const LEADERBOARD_BLACKLIST = ['user1', 'user2', 'savagebot']; // Add usernames here in lowercase
+const LEADERBOARD_BLACKLIST = ['botrix', 'user2']; // Add usernames here in lowercase
 
 database.ref('users').orderByChild('points').limitToLast(20).on('value', (snapshot) => {
     const list = document.getElementById('leaderboard-list');
