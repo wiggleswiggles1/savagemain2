@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 </head>
 <body>
     <div class="game-wrapper">
@@ -40,9 +40,9 @@
 </div>
     </div>
 
-    <script>
-        // Use your existing Firebase Config
-        const firebaseConfig = {
+<script>
+  // Your config for the NEW "savagekinko" database
+  const firebaseConfig = {
     apiKey: "AIzaSyAMTw5BT6pJJEuFMbS65vrwhVAm3OP4b0Y",
     authDomain: "savagekinko.firebaseapp.com",
     databaseURL: "https://savagekinko-default-rtdb.firebaseio.com",
@@ -51,10 +51,12 @@
     messagingSenderId: "644180457134",
     appId: "1:644180457134:web:990c5211f6015ca0511f3f",
     measurementId: "G-ZBEJLEXXQF"
-    };
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-    </script>
+  };
+
+  // Initialize Firebase in COMPAT mode
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
     <script src="app.js"></script>
 </body>
 </html>
