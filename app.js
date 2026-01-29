@@ -75,11 +75,15 @@ bucketValues.forEach((val, i) => {
 });
 
 // --- DROP BALL (Controlled Physics) ---
-function dropBall(username) {
-    const spawnX = 300 + (Math.random() * 6 - 3); // Narrower spawn for center favor
+function dropBall(username, color) {
+    const spawnX = 300 + (Math.random() * 6 - 3);
     const ball = Bodies.circle(spawnX, 10, 8, {
         restitution: 0.4, friction: 0.05, frictionAir: 0.05, label: 'ball',
-        render: { fillStyle: '#53fc18', strokeStyle: '#fff', lineWidth: 2 }
+        render: { 
+            fillStyle: color, // <--- The ball is now colored!
+            strokeStyle: '#ffffff', 
+            lineWidth: 2 
+        }
     });
     ball.username = username;
     World.add(world, ball);
@@ -95,8 +99,8 @@ async function processQueue() {
     if (isProcessingQueue || dropQueue.length === 0) return;
     isProcessingQueue = true;
     while (dropQueue.length > 0) {
-        const username = dropQueue.shift();
-        dropBall(username);
+        const item = dropQueue.shift(); // Get the object {username, color}
+        dropBall(item.username, item.color); 
         await new Promise(resolve => setTimeout(resolve, 400)); 
     }
     isProcessingQueue = false;
@@ -131,7 +135,11 @@ Events.on(engine, 'collisionStart', (event) => {
 database.ref('drops').on('child_added', (snapshot) => {
     const data = snapshot.val();
     if (data?.username) {
-        dropQueue.push(data.username);
+        // Pass the color into the queue
+        dropQueue.push({ 
+            username: data.username, 
+            color: data.color || '#53fc18' 
+        });
         processQueue();
         database.ref('drops/' + snapshot.key).remove();
     }
