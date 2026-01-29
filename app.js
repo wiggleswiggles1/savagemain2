@@ -166,17 +166,31 @@ database.ref('admin_commands').on('child_added', (snapshot) => {
     database.ref('admin_commands/' + snapshot.key).remove();
 });
 
-// --- LEADERBOARD (Points Based) ---
-database.ref('users').orderByChild('points').limitToLast(5).on('value', (snapshot) => {
+// --- LEADERBOARD (Points Based with Blacklist) ---
+const LEADERBOARD_BLACKLIST = ['user1', 'user2', 'savagebot']; // Add usernames here in lowercase
+
+database.ref('users').orderByChild('points').limitToLast(20).on('value', (snapshot) => {
     const list = document.getElementById('leaderboard-list');
     if (!list) return;
-    list.innerHTML = '';
+    
     let players = [];
+    
     snapshot.forEach(c => {
         const pData = c.val();
-        players.push({ name: c.key, pts: pData.points || 0 });
+        const username = c.key;
+
+        // Only add to the list if they are NOT blacklisted
+        if (!LEADERBOARD_BLACKLIST.includes(username.toLowerCase())) {
+            players.push({ name: username, pts: pData.points || 0 });
+        }
     });
-    players.reverse().forEach((p, i) => {
+
+    // Sort: Highest points first, then take only the top 5
+    const top5 = players.sort((a, b) => b.pts - a.pts).slice(0, 5);
+
+    // Render to UI
+    list.innerHTML = '';
+    top5.forEach((p, i) => {
         const li = document.createElement('li');
         const isFirst = i === 0;
         li.innerHTML = `
