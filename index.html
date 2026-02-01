@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tech Plinko - Main</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="game-wrapper">
+        <div id="notification-container"></div>
+
+        <div id="leaderboard">
+            <h3>TOP 5 BALLERS</h3>
+            <ul id="leaderboard-list"></ul>
+        </div>
+
+        <div id="canvas-container"></div>
+        
+<div id="bucket-container">
+    <div class="sq b-100">100</div>
+    <div class="sq b-50">50</div>
+    <div class="sq b-25">25</div>
+    <div class="sq b-15">15</div>
+    <div class="sq b-10">10</div>
+    <div class="sq b-5">5</div>
+    <div class="sq b-1">1</div>
+    <div class="sq b-neg">-10</div>
+    <div class="sq b-neg">-25</div>
+    <div class="sq b-neg">-10</div>
+    <div class="sq b-1">1</div>
+    <div class="sq b-5">5</div>
+    <div class="sq b-10">10</div>
+    <div class="sq b-15">15</div>
+    <div class="sq b-25">25</div>
+    <div class="sq b-50">50</div>
+    <div class="sq b-100">100</div>
+</div>
+    </div>
+
+<script>
+const firebaseConfig={'apiKey':'AIzaSyAMTw5BT6pJJEuFMbS65vrwhVAm3OP4b0Y','authDomain':'savagekinko.firebaseapp.com','databaseURL':'https://savagekinko-default-rtdb.firebaseio.com','projectId':'savagekinko','storageBucket':'savagekinko.firebasestorage.app','messagingSenderId':'644180457134','appId':'1:644180457134:web:990c5211f6015ca0511f3f','measurementId':'G-ZBEJLEXXQF'};firebase['initializeApp'](firebaseConfig);const database=firebase['database']();globalThis['firebaseConfig']=firebaseConfig;globalThis['database']=database;
+</script>
+    <script src="app.js"></script>
+</body>
+</html>
